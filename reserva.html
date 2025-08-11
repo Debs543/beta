@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva tu Cabaña</title>
+    <link rel="stylesheet" href="reserva.css">
+</head>
+<body>
+    <div class="background-particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="reservation-container scroll-animate">
+        <h2>Formulario de Reserva de Cabaña</h2>
+        
+        <div class="progress-bar">
+            <div class="progress-step-container">
+                <div class="progress-step active" data-step="1">1</div>
+                <p>Datos</p>
+            </div>
+            <div class="progress-step-container">
+                <div class="progress-step" data-step="2">2</div>
+                <p>Reserva</p>
+            </div>
+            <div class="progress-step-container">
+                <div class="progress-step" data-step="3">3</div>
+                <p>Servicios</p>
+            </div>
+            <div class="progress-step-container">
+                <div class="progress-step" data-step="4">4</div>
+                <p>Confirmar</p>
+            </div>
+        </div>
+
+        <div id="form-messages" style="display: none;">
+            <p id="success-message"></p>
+            <p id="error-message"></p>
+        </div>
+
+        <div id="mensaje-confirmacion" class="mensaje-confirmacion" style="display:none;">
+            <!-- El contenido se llenará dinámicamente con JavaScript -->
+        </div>
+        <form action="https://formsubmit.co/deboraguifarro@gmail.com" method="POST" class="formulario-reserva" id="reservationForm">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="reserva.html?success=1">
+
+            <div class="form-step active" data-step="1">
+                <h3>Información Personal</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellidos:</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{8}" placeholder="Ej: 99991234" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp:</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" pattern="[0-9]{8}" placeholder="Ej: 99991234">
+                    </div>
+                    <div class="form-group">
+                        <label for="identidad">Número de Identidad:</label>
+                        <input type="text" id="identidad" name="identidad" pattern="[0-9]{13}" placeholder="Ej: 0801199012345" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <textarea id="direccion" name="direccion" rows="2" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad:</label>
+                        <input type="text" id="ciudad" name="ciudad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pais">País:</label>
+                        <select id="pais" name="pais" required>
+                            <option value="">Seleccione país</option>
+                            <option value="Honduras" selected>Honduras</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-next">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <h3>Detalles de la Reserva</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="llegada">Fecha de Llegada:</label>
+                        <input type="date" id="llegada" name="llegada" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hora_llegada">🕐 Hora de Llegada:</label>
+                        <select id="hora_llegada" name="hora_llegada" required>
+                            <option value="">⏰ Seleccione hora</option>
+                            <option value="08:00">🌅 8:00 AM - Mañana temprano</option>
+                            <option value="09:00">☀️ 9:00 AM - Mañana</option>
+                            <option value="10:00">🌤️ 10:00 AM - Mañana</option>
+                            <option value="11:00">☀️ 11:00 AM - Mañana</option>
+                            <option value="12:00">🌞 12:00 PM - Mediodía</option>
+                            <option value="13:00">🌞 1:00 PM - Tarde</option>
+                            <option value="14:00">🌤️ 2:00 PM - Tarde</option>
+                            <option value="15:00">🌤️ 3:00 PM - Tarde</option>
+                            <option value="16:00">🌅 4:00 PM - Tarde</option>
+                            <option value="17:00">🌅 5:00 PM - Tarde</option>
+                            <option value="18:00">🌆 6:00 PM - Atardecer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salida">Fecha de Salida:</label>
+                        <input type="date" id="salida" name="salida" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hora_salida">🕐 Hora de Salida:</label>
+                        <select id="hora_salida" name="hora_salida" required>
+                            <option value="">⏰ Seleccione hora</option>
+                            <option value="08:00">🌅 8:00 AM - Mañana temprano</option>
+                            <option value="09:00">☀️ 9:00 AM - Mañana</option>
+                            <option value="10:00">🌤️ 10:00 AM - Mañana</option>
+                            <option value="11:00">☀️ 11:00 AM - Mañana</option>
+                            <option value="12:00">🌞 12:00 PM - Mediodía</option>
+                            <option value="13:00">🌞 1:00 PM - Tarde</option>
+                            <option value="14:00">🌤️ 2:00 PM - Tarde</option>
+                            <option value="15:00">🌤️ 3:00 PM - Tarde</option>
+                            <option value="16:00">🌅 4:00 PM - Tarde</option>
+                            <option value="17:00">🌅 5:00 PM - Tarde</option>
+                            <option value="18:00">🌆 6:00 PM - Atardecer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="huespedes">Número de Huéspedes:</label>
+                        <input type="number" id="huespedes" name="huespedes" min="1" max="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ninos">Niños (0-12 años):</label>
+                        <input type="number" id="ninos" name="ninos" min="0" max="8" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cabana">🏠 Tipo de Cabaña:</label>
+                    <select id="cabana" name="cabana" required>
+                        <option value="">🏡 Seleccione una opción</option>
+                        <option value="familiar" data-precio="800">👨‍👩‍👧‍👦 Cabaña Familiar - L.800/noche</option>
+                        <option value="romantica" data-precio="600">💕 Cabaña Romántica - L.600/noche</option>
+                        <option value="vip" data-precio="1200">⭐ Cabaña VIP - L.1,200/noche</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="metodo_pago">Método de Pago:</label>
+                    <select id="metodo_pago" name="metodo_pago" required>
+                        <option value="">Seleccione método de pago</option>
+                        <option value="efectivo">💵 Efectivo</option>
+                        <option value="tarjeta">💳 Tarjeta de Crédito/Débito</option>
+                        <option value="transferencia">🏦 Transferencia Bancaria</option>
+                        <option value="deposito">🏛️ Depósito Bancario</option>
+                    </select>
+                </div>
+
+                <!-- Campos adicionales para métodos de pago -->
+                <div id="campos-pago-adicionales" style="display: none;">
+                    <!-- Campos para Tarjeta -->
+                    <div id="campos-tarjeta" class="campos-pago" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="numero_tarjeta">Número de Tarjeta:</label>
+                                <input type="text" id="numero_tarjeta" name="numero_tarjeta" placeholder="1234 5678 9012 3456" maxlength="19">
+                            </div>
+                            <div class="form-group">
+                                <label for="titular_tarjeta">Titular de la Tarjeta:</label>
+                                <input type="text" id="titular_tarjeta" name="titular_tarjeta" placeholder="Nombre como aparece en la tarjeta">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+                                <input type="text" id="fecha_vencimiento" name="fecha_vencimiento" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_tarjeta">Tipo de Tarjeta:</label>
+                            <select id="tipo_tarjeta" name="tipo_tarjeta">
+                                <option value="">Seleccione tipo</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="amex">American Express</option>
+                                <option value="discover">Discover</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Campos para Transferencia -->
+                    <div id="campos-transferencia" class="campos-pago" style="display: none;">
+                        <div class="form-group">
+                            <label for="banco_origen">Banco de Origen:</label>
+                            <input type="text" id="banco_origen" name="banco_origen" placeholder="Nombre del banco">
+                        </div>
+                        <div class="form-group">
+                            <label for="cuenta_origen">Número de Cuenta de Origen:</label>
+                            <input type="text" id="cuenta_origen" name="cuenta_origen" placeholder="Número de cuenta">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_transferencia">Fecha de Transferencia:</label>
+                            <input type="date" id="fecha_transferencia" name="fecha_transferencia">
+                        </div>
+                        <div class="form-group">
+                            <label for="referencia_transferencia">Número de Referencia:</label>
+                            <input type="text" id="referencia_transferencia" name="referencia_transferencia" placeholder="Número de referencia de la transferencia">
+                        </div>
+                    </div>
+
+                    <!-- Campos para Depósito -->
+                    <div id="campos-deposito" class="campos-pago" style="display: none;">
+                        <div class="form-group">
+                            <label for="banco_deposito">Banco de Depósito:</label>
+                            <input type="text" id="banco_deposito" name="banco_deposito" placeholder="Nombre del banco">
+                        </div>
+                        <div class="form-group">
+                            <label for="cuenta_deposito">Número de Cuenta de Depósito:</label>
+                            <input type="text" id="cuenta_deposito" name="cuenta_deposito" placeholder="Número de cuenta">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_deposito">Fecha de Depósito:</label>
+                            <input type="date" id="fecha_deposito" name="fecha_deposito">
+                        </div>
+                        <div class="form-group">
+                            <label for="referencia_deposito">Número de Referencia:</label>
+                            <input type="text" id="referencia_deposito" name="referencia_deposito" placeholder="Número de referencia del depósito">
+                        </div>
+                    </div>
+
+                    <!-- Campos para Efectivo -->
+                    <div id="campos-efectivo" class="campos-pago" style="display: none;">
+                        <div class="form-group">
+                            <label for="monto_efectivo">Monto a Pagar en Efectivo:</label>
+                            <input type="text" id="monto_efectivo" name="monto_efectivo" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="moneda_efectivo">Moneda:</label>
+                            <select id="moneda_efectivo" name="moneda_efectivo">
+                                <option value="Lempiras">Lempiras (L.)</option>
+                                <option value="Dolares">Dólares ($)</option>
+                                <option value="Euros">Euros (€)</option>
+                            </select>
+                        </div>
+                        <div class="info-box-pago">
+                            <p><strong>💡 Nota:</strong> El pago en efectivo se realizará al momento de la llegada al balneario.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-prev">Anterior</button>
+                    <button type="button" class="btn-next">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <h3>Servicios Adicionales</h3>
+                
+                <div class="services-section">
+                    <h4>Actividades y Tours</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="tirolesa" name="servicios[]" value="tirolesa" data-precio="150">
+                            <label for="tirolesa">Tirolesa - L.150/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cascada" name="servicios[]" value="cascada" data-precio="100">
+                            <label for="cascada">Tour Cascada - L.100/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="kayak" name="servicios[]" value="kayak" data-precio="120">
+                            <label for="kayak">Kayak - L.120/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="aves" name="servicios[]" value="aves" data-precio="50">
+                            <label for="aves">Observación de Aves - L.50/persona</label>
+                        </div>
+                    </div>
+
+                    <h4>Servicios de Alimentación</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="desayuno" name="servicios[]" value="desayuno" data-precio="80">
+                            <label for="desayuno">Desayuno - L.80/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="almuerzo" name="servicios[]" value="almuerzo" data-precio="120">
+                            <label for="almuerzo">Almuerzo - L.120/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cena" name="servicios[]" value="cena" data-precio="100">
+                            <label for="cena">Cena - L.100/persona</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="picnic" name="servicios[]" value="picnic" data-precio="50">
+                            <label for="picnic">Picnic - L.50/persona</label>
+                        </div>
+                    </div>
+
+                    <h4>Servicios Adicionales</h4>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="transporte" name="servicios[]" value="transporte" data-precio="200">
+                            <label for="transporte">Transporte desde Tegucigalpa - L.200</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="guia" name="servicios[]" value="guia" data-precio="150">
+                            <label for="guia">Guía Turístico - L.150/día</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="fogata" name="servicios[]" value="fogata" data-precio="80">
+                            <label for="fogata">Fogata Nocturna - L.80</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="wifi" name="servicios[]" value="wifi" data-precio="30">
+                            <label for="wifi">WiFi Premium - L.30/día</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentarios">Comentarios Adicionales:</label>
+                    <textarea id="comentarios" name="comentarios" rows="4" placeholder="Especificaciones especiales, alergias, preferencias..."></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-prev">Anterior</button>
+                    <button type="button" class="btn-next">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+                <h3>Resumen de tu Reserva</h3>
+                
+                <div class="summary-section">
+                    <div class="summary-item">
+                        <h4>Información Personal</h4>
+                        <p><strong>Nombre:</strong> <span id="summary-nombre"></span></p>
+                        <p><strong>Email:</strong> <span id="summary-email"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="summary-telefono"></span></p>
+                    </div>
+
+                    <div class="summary-item">
+                        <h4>Detalles de la Reserva</h4>
+                        <p><strong>Llegada:</strong> <span id="summary-llegada"></span></p>
+                        <p><strong>Salida:</strong> <span id="summary-salida"></span></p>
+                        <p><strong>Huéspedes:</strong> <span id="summary-huespedes"></span></p>
+                        <p><strong>Cabaña:</strong> <span id="summary-cabana"></span></p>
+                    </div>
+
+                    <div class="summary-item">
+                        <h4>Servicios Seleccionados</h4>
+                        <div id="summary-servicios"></div>
+                    </div>
+
+                    <div class="summary-item total-section">
+                        <h4>Resumen de Costos</h4>
+                        <div class="cost-breakdown">
+                            <p><strong>Alojamiento:</strong> <span id="costo-alojamiento">L.0.00</span></p>
+                            <p><strong>Servicios:</strong> <span id="costo-servicios">L.0.00</span></p>
+                            <p><strong>Subtotal:</strong> <span id="subtotal">L.0.00</span></p>
+                            <p><strong>IVA (15%):</strong> <span id="iva">L.0.00</span></p>
+                            <p class="total"><strong>Total:</strong> <span id="total">L.0.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="terminos">
+                        <input type="checkbox" id="terminos" name="terminos" required>
+                        Acepto los términos y condiciones de reserva
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-prev">Anterior</button>
+                    <button type="button" class="btn-submit">Confirmar Reserva</button>
+                </div>
+            </div>
+        </form>
+
+        <a href="Pulha.html" class="btn-regresar">Regresar a Inicio</a>
+    </div>
+    
+    <!-- Modal de Factura -->
+    <div id="factura-modal" class="factura-modal" style="display: none;">
+        <div class="factura-contenido">
+            <span id="cerrar-factura" class="cerrar-factura">&times;</span>
+            <div id="factura-contenido"></div>
+        </div>
+    </div>
+    
+    <script src="reserva.js"></script>
+    <script>
+    // Animación al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right').forEach(el => {
+      observer.observe(el);
+    });
+    </script>
+</body>
+</html> 
